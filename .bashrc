@@ -115,7 +115,7 @@ function cp() {
   current=$(git rev-parse --abbrev-ref HEAD)
   if [ "$current" == "main" ]
   then
-    echo -e "${RED}YOU CANNOT DIRECTLY COMMIT TO MASTER.${NC}"
+    echo -e "${RED}YOU CANNOT DIRECTLY COMMIT TO MAIN.${NC}"
   else
     git cherry-pick $1
   fi
