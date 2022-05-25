@@ -62,6 +62,29 @@ function nb() {
   fi
 }
 
+# Deletes the specified branch after confirmation.
+#
+# EXAMPLE USAGE:
+# `db 123`
+function db() {
+  branch=$1
+
+  read -p "Are you sure? (y/n) " -n 1 -r
+  echo
+  if [[ ! $REPLY =~ ^[Yy]$ ]]
+  then
+      return
+  fi
+
+  repo=$(basename `git rev-parse --show-toplevel`)
+
+  if [[ " ${OTHER_REPOS[@]} " =~ " ${repo} " ]]; then
+    git branch -D ${PROJECTPREFIX}-$branch
+  else
+    git branch -D $branch
+  fi
+}
+
 # Function to quickly push changes out to the remote repository. Function will prevent
 # a push onto the main branch
 #
